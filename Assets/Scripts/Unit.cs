@@ -32,7 +32,10 @@ public class Unit : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        
+        if(currentHealth <=0)
+        {
+            return;
+        }
         transform.DOPunchScale(new Vector3(.2f,-.2f,0),.25f,2).SetRelative(true);
         GameObject text = Instantiate(textPrefab, 
             transform.position + new Vector3(UnityEngine.Random.Range(-.5f,.5f ),5,0), Quaternion.identity);

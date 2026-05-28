@@ -85,8 +85,14 @@ public class BattleManager : MonoBehaviour
     public void BackToPlaceUnits()
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.AppendCallback(playerUnit.BackUnit);
-        sequence.JoinCallback(enemyUnit.BackUnit);
+        if(playerUnit != null) 
+        {
+            sequence.AppendCallback(playerUnit.BackUnit);
+        }
+        if(enemyUnit != null) 
+        {
+            sequence.JoinCallback(enemyUnit.BackUnit);
+        }
         sequence.AppendInterval(.5f);
         sequence.AppendCallback(()=>
         {
@@ -96,10 +102,44 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Se acabo la pelea");
+                ReorderUnit();
             }       
-        });
-        
+        });  
+        //sequence.AppendCallback(ReorderUnit);      
+    }
+
+    public void EndOfTurn()
+    {
+        playerUnitGO.RemoveAll(u => u == null);
+        enemyUnitGO.RemoveAll(u => u == null);
+    }
+    public void ReorderUnit()
+    {
+        // Limpiar listas ANTES de iterar, con RemoveAll (seguro)
+        playerUnitGO.RemoveAll(p => p == null);
+        enemyUnitGO.RemoveAll(p => p == null);
+
+        // Reposicionar con índice directo, sin IndexOf sobre lista sucia
+        for (int i = 0; i < playerUnitGO.Count; i++)
+        {
+            playerUnitGO[i].transform.DOJump(playerUnitPos[i].position, 1, 1, .25f);
+        }
+        for (int i = 0; i < enemyUnitGO.Count; i++)
+        {
+            enemyUnitGO[i].transform.DOJump(enemyUnitPos[i].position, 1, 1, .25f);
+        }
+
+        // Actualizar referencias frontales y continuar si quedan unidades
+        if (playerUnitGO.Count > 0 && enemyUnitGO.Count > 0)
+        {
+            playerUnit = playerUnitGO[0];
+            enemyUnit = enemyUnitGO[0];
+            Clash();
+        }
+        else
+        {
+            Debug.Log(playerUnitGO.Count == 0 ? "Enemy wins!" : "Player wins!");
+        }
     }
 
 
