@@ -18,13 +18,13 @@ public class Unit : MonoBehaviour
     public bool playerUnit;
 
 
-    void Start()
+    public void Initialize()
     {
         currentHealth = unitData.maxHealth;
         currentDefense = unitData.initalDefense;
         currentAttack = unitData.initialAttack;
         unitSpriteRenderer.sprite = unitData.unitSprite;
-        if(!playerUnit)
+        if(playerUnit)
         {
             unitSpriteRenderer.flipX = true;
         }
