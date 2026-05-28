@@ -7,8 +7,6 @@ public class BattleManager : MonoBehaviour
     public Unit playerUnit;
     public Unit enemyUnit;
 
-    Vector3 posOriginPlayer;
-    Vector3 posOriginEnemy;    
 
     void Awake()
     {

@@ -5,24 +5,29 @@ using System;
 
 public class Unit : MonoBehaviour
 {
-    public int currentHealth;
-    public int maxHealth = 10;
+    public UnitData unitData;
+    public int currentHealth;   
 
-    public int currentDefense;
-    public int initalDefense = 5;
+    public int currentDefense;   
 
     public int currentAttack;
-    public int initialAttack;
+    
+    public SpriteRenderer unitSpriteRenderer;
     public GameObject textPrefab;
-
     private Vector3 currentPos;
+    public bool playerUnit;
 
 
     void Start()
     {
-        currentHealth = maxHealth;
-        currentDefense = initalDefense;
-        currentAttack = initialAttack;
+        currentHealth = unitData.maxHealth;
+        currentDefense = unitData.initalDefense;
+        currentAttack = unitData.initialAttack;
+        unitSpriteRenderer.sprite = unitData.unitSprite;
+        if(!playerUnit)
+        {
+            unitSpriteRenderer.flipX = true;
+        }
     }
     public void TakeDamage(int damage)
     {

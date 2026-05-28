@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4fc14e63ee6474d951c7d4ebd72413, type: 3}
+  m_Name: Guerrero
+  m_EditorClassIdentifier: Assembly-CSharp::UnitData
+  nameUnit: 
+  maxHealth: 10
+  initalDefense: 5
+  initialAttack: 2
+  unitSprite: {fileID: -215092342, guid: 5e91277ec157ccd4e96720e34470f449, type: 3}
