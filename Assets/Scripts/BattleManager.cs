@@ -28,6 +28,8 @@ public class BattleManager : MonoBehaviour
     }
     public void Start()
     {
+        playerUnitsData.Clear();
+        playerUnitsData.AddRange(DataManager.selectedUnits);
         GeneratePlayerUnit();
         GenerateEnemyUnit();
         playerUnit = playerUnitGO[0];

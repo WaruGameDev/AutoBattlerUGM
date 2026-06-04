@@ -15,5 +15,5 @@ MonoBehaviour:
   nameUnit: 
   maxHealth: 10
   initalDefense: 5
-  initialAttack: 2
+  initialAttack: 10
   unitSprite: {fileID: -1194509543, guid: 5e91277ec157ccd4e96720e34470f449, type: 3}
