@@ -119,27 +119,34 @@ public class BattleManager : MonoBehaviour
         playerUnitGO.RemoveAll(p => p == null);
         enemyUnitGO.RemoveAll(p => p == null);
 
+        Sequence sequence = DOTween.Sequence();
+
         // Reposicionar con índice directo, sin IndexOf sobre lista sucia
         for (int i = 0; i < playerUnitGO.Count; i++)
         {
-            playerUnitGO[i].transform.DOJump(playerUnitPos[i].position, 1, 1, .25f);
+            sequence.Append(playerUnitGO[i].transform.DOJump(playerUnitPos[i].position, 1, 1, .25f));
         }
         for (int i = 0; i < enemyUnitGO.Count; i++)
         {
-            enemyUnitGO[i].transform.DOJump(enemyUnitPos[i].position, 1, 1, .25f);
+            sequence.Join(enemyUnitGO[i].transform.DOJump(enemyUnitPos[i].position, 1, 1, .25f));
         }
 
-        // Actualizar referencias frontales y continuar si quedan unidades
-        if (playerUnitGO.Count > 0 && enemyUnitGO.Count > 0)
+        sequence.AppendCallback(()=>
         {
-            playerUnit = playerUnitGO[0];
-            enemyUnit = enemyUnitGO[0];
-            Clash();
-        }
-        else
-        {
-            Debug.Log(playerUnitGO.Count == 0 ? "Enemy wins!" : "Player wins!");
-        }
+            // Actualizar referencias frontales y continuar si quedan unidades
+            if (playerUnitGO.Count > 0 && enemyUnitGO.Count > 0)
+            {
+                playerUnit = playerUnitGO[0];
+                enemyUnit = enemyUnitGO[0];
+                Clash();
+            }
+            else
+            {
+                Debug.Log(playerUnitGO.Count == 0 ? "Enemy wins!" : "Player wins!");
+            }
+        });
+
+        
     }
 
 
