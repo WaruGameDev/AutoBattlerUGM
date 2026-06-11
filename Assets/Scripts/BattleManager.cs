@@ -26,15 +26,22 @@ public class BattleManager : MonoBehaviour
     {
         instance = this;
     }
-    public void Start()
-    {
-        playerUnitsData.Clear();
-        playerUnitsData.AddRange(DataManager.selectedUnits);
-        GeneratePlayerUnit();
+    public void StartBattle()
+    {        
         GenerateEnemyUnit();
         playerUnit = playerUnitGO[0];
         enemyUnit = enemyUnitGO[0];
         Clash();
+    }
+    public void Initialize()
+    {
+        if(DataManager.selectedUnits.Count>0)
+        {
+            playerUnitsData.Clear();
+            playerUnitsData.AddRange(DataManager.selectedUnits);
+        }        
+        GeneratePlayerUnit();
+        
     }
     public void GeneratePlayerUnit()
     {
@@ -61,13 +68,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    // void Update()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         Clash();
-    //     }
-    // }
+   
     public void Clash()
     {
         Sequence sequence = DOTween.Sequence();
@@ -107,7 +108,7 @@ public class BattleManager : MonoBehaviour
                 ReorderUnit();
             }       
         });  
-        //sequence.AppendCallback(ReorderUnit);      
+        
     }
 
     public void EndOfTurn()
@@ -144,7 +145,7 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(playerUnitGO.Count == 0 ? "Enemy wins!" : "Player wins!");
+                CheckUnit();
             }
         });
 
@@ -154,6 +155,14 @@ public class BattleManager : MonoBehaviour
 
     public void CheckUnit()
     {
-        
+        Debug.Log(playerUnitGO.Count == 0 ? "Enemy wins!" : "Player wins!");
+        if(playerUnitGO.Count > 0)
+        {
+            DungeonManager.instance.NextDungeonEvent();
+        }
+        else
+        {
+            Debug.Log("Haha perdiste");
+        }
     }
 }

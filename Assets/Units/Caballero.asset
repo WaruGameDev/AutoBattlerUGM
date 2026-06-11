@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Caballero
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   nameUnit: 
-  maxHealth: 10
+  maxHealth: 20
   initalDefense: 5
-  initialAttack: 10
+  initialAttack: 15
   unitSprite: {fileID: -1194509543, guid: 5e91277ec157ccd4e96720e34470f449, type: 3}
