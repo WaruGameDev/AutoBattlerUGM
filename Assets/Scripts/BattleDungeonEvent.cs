@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "Battle", menuName ="Dungeon/Event")]
+[CreateAssetMenu(fileName = "Battle", menuName ="Dungeon/Battle")]
 public class BattleDungeonEvent : DungeonEvent
 {
     public List<UnitData> enemyPartyData;

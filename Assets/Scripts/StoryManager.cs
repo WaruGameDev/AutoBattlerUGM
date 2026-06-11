@@ -1,16 +1,28 @@
+using TMPro;
 using UnityEngine;
 
 public class StoryManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public CanvasGroup panelStory;
+    public TextMeshProUGUI storyText;
+    public static StoryManager instance;
+    void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetStory(string story)
     {
-        
+        panelStory.alpha =1;
+        panelStory.blocksRaycasts =true;
+        panelStory.interactable = true;
+        storyText.text = story;
+    }
+    public void Next()
+    {
+        panelStory.alpha =0;
+        panelStory.blocksRaycasts =false;
+        panelStory.interactable = false;
+        DungeonManager.instance.NextDungeonEvent();
     }
 }
